@@ -6,11 +6,13 @@ This batch file backs up and restores Star Citizen operational profiles and sett
 # 利用上の注意/Usage Notes
 操作プロファイルは手動でゲーム内からImport/Exportする必要があります  
 (操作プロファイル以外はImport/Exportしなくても適用されます)  
+  
 詳しいImport/Export方法は以下を参考にしてください  
 https://support.robertsspaceindustries.com/hc/en-us/articles/360000183328-Create-export-and-import-custom-profiles  
   
 The operation profile must be manually Import/Exported from within the game  
 (Except for the operation profile, it will be applied without Import/Export)  
+  
 For detailed Import/Export instructions, please refer to the following  
 https://support.robertsspaceindustries.com/hc/en-us/articles/360000183328-Create-export-and-import-custom-profiles  
   
