@@ -1,8 +1,8 @@
 @echo off
 
 echo --------------------------------------------------------------------------------------------------------------
-echo Disclaimer
-echo Use this batch file at your own risk.
+echo 免責事項
+echo 本バッチファイルの使用によって発生した、いかなる損害に対しても作者は一切の責任を負いません
 echo.
 
 echo 作者 
@@ -10,28 +10,26 @@ echo Luke514 Twitter:@rx_luke Discord:Shadow514#0642
 echo --------------------------------------------------------------------------------------------------------------
 echo.
 
-SETLOCAL enabledelayedexpansion
-
-set /P CHK="Do you want to backup or restore your settings? (backup/restore)"
+set /P CHK="操作設定のバックアップ、復元どちらを実施しますか？ (backup/restore)"
 
 if /i %CHK%==backup (
-  set MODE=Backup
+  set MODE=バックアップ
 ) else if /i %CHK%==b (
-  set MODE=Backup
+  set MODE=バックアップ
 ) else if /i %CHK%==restore (
-  set MODE=Restore
+  set MODE=復元
 ) else if /i %CHK%==r (
-  set MODE=Restore
+  set MODE=復元
 ) else (
   echo.
-  echo An unexpected character was entered.
-  echo Abort process.
+  echo 予期しない文字が入力されました
+  echo 処理を中止します
   echo.
   pause
   EXIT
 )
 
-set /P CHK="Which setting do you want to %MODE%, LIVE or PTU? (live/ptu)"
+set /P CHK="LIVEかPTU、どちらの設定を%MODE%しますか？ (live/ptu)"
 
 if /i %CHK%==live (
   set PLYVER=LIVE
@@ -43,8 +41,8 @@ if /i %CHK%==live (
   set PLYVER=PTU
 ) else (
   echo.
-  echo An unexpected character was entered.
-  echo Abort process.
+  echo 予期しない文字が入力されました
+  echo 処理を中止します
   echo.
   pause
   EXIT
@@ -60,66 +58,50 @@ set STUSRDIR_D=%STUSRPATH%\StarCitizen\%PLYVER%\USER\Client\0\Profiles\default
 set RESDIR=dir /s /b ".\BackupData\%PLYVER%\*.xml"*
 
 echo.
-echo %MODE% targets are
+echo %MODE%対象は以下です
 echo.
 
-if /i %MODE%==Backup (
+if /i %MODE%==バックアップ (
   %USRDIR_M% 2>nul
   %USRDIR_D% 2>nul
-) else if /i %MODE%==Restore (
+) else if /i %MODE%==復元 (
   %RESDIR% 2>nul
 )
 if %errorlevel% neq 0 (
   echo.
-  echo MODE% process terminates because the target folder does not exist.
+  echo %MODE%対象のフォルダが存在しないため、処理を終了します
   echo.
   pause
   EXIT
 )
 echo.
 
-set /P CHK="Are you sure you want to run %MODE%? (yes/no)"
+set /P CHK="%MODE%を実行してもよろしいですか？ (yes/no)"
 
 if /i %CHK%==yes (goto CONTINUE)
 if /i %CHK%==y (goto CONTINUE)
 
 echo.
-echo An unexpected character was entered.
-echo Abort process.
+echo 予期しない文字が入力されました
+echo 処理を中止します
 echo.
 pause
 exit
 
 :CONTINUE
-echo.
 
-if /i %MODE%==Backup (
+if /i %MODE%==バックアップ (
   robocopy %STUSRDIR_M% .\BackupData\%PLYVER%\MappingProfile /r:1 /w:1 > nul
-  if !errorlevel! leq 7 (
-    echo The operation profile has been backed up to .\BackupData\%PLYVER%\MappingProfile
-  ) else (
-    echo Backup of the operating profile failed.
-  )
   robocopy %STUSRDIR_D% .\BackupData\%PLYVER%\CurrentSettting /r:1 /w:1 > nul
-  if !errorlevel! leq 7 (
-    echo Configuration is backed up to .\BackupData\%PLYVER%\CurrentSettting
-  ) else (
-    echo Configuration backup failed.
-  )
-) else if /i %MODE%==Restore (
+  echo.
+  echo 設定を.\BackupData\%PLYVER%にバックアップしました
+  echo.
+) else if /i %MODE%==復元 (
   robocopy .\BackupData\%PLYVER%\MappingProfile %STUSRDIR_M% /r:1 /w:1 > nul
-  if !errorlevel! leq 7 (
-    echo Operating profile restored.
-  ) else (
-    echo Failed to restore operating profile.
-  )
   robocopy .\BackupData\%PLYVER%\CurrentSettting %STUSRDIR_D% /r:1 /w:1 > nul
-  if !errorlevel! leq 7 (
-    echo Settings restored.
-  ) else (
-    echo Failed to restore settings.
-  )
+  echo.
+  echo 設定を復元しました
+  echo.
 )
 
-echo.
 pause

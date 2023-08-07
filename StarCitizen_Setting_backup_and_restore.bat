@@ -10,16 +10,18 @@ echo Luke514 Twitter:@rx_luke Discord:Shadow514#0642
 echo --------------------------------------------------------------------------------------------------------------
 echo.
 
-set /P CHK="操作設定のバックアップ、復元どちらを実施しますか？ (backup/restore)"
+SETLOCAL enabledelayedexpansion
+
+SET /P CHK="操作設定のバックアップ、復元どちらを実施しますか？ (backup/restore)"
 
 if /i %CHK%==backup (
-  set MODE=バックアップ
+  SET MODE=バックアップ
 ) else if /i %CHK%==b (
-  set MODE=バックアップ
+  SET MODE=バックアップ
 ) else if /i %CHK%==restore (
-  set MODE=復元
+  SET MODE=復元
 ) else if /i %CHK%==r (
-  set MODE=復元
+  SET MODE=復元
 ) else (
   echo.
   echo 予期しない文字が入力されました
@@ -29,16 +31,16 @@ if /i %CHK%==backup (
   EXIT
 )
 
-set /P CHK="LIVEかPTU、どちらの設定を%MODE%しますか？ (live/ptu)"
+SET /P CHK="LIVEかPTU、どちらの設定を%MODE%しますか？ (live/ptu)"
 
 if /i %CHK%==live (
-  set PLYVER=LIVE
+  SET PLYVER=LIVE
 ) else if /i %CHK%==l (
-  set PLYVER=LIVE
+  SET PLYVER=LIVE
 ) else if /i %CHK%==ptu (
-  set PLYVER=PTU
+  SET PLYVER=PTU
 ) else if /i %CHK%==p (
-  set PLYVER=PTU
+  SET PLYVER=PTU
 ) else (
   echo.
   echo 予期しない文字が入力されました
@@ -48,14 +50,14 @@ if /i %CHK%==live (
   EXIT
 )
 
-for /f "tokens=*" %%i in ('findstr /v "{ ( ) js: Error libraryFolder ." %APPDATA%\rsilauncher\log.log ^| findstr "\\"') do set LIBPATH=%%~i
-set LIBPATH=%LIBPATH:\\=\%
-set USRDIR_M=dir /s /b "%LIBPATH%\StarCitizen\%PLYVER%\USER\Client\0\Controls\Mappings\*.xml"*
-set USRDIR_D=dir /s /b "%LIBPATH%\StarCitizen\%PLYVER%\USER\Client\0\Profiles\default\*.xml"*
-for %%i in ("%LIBPATH%") do set STUSRPATH=%%~si
-set STUSRDIR_M=%STUSRPATH%\StarCitizen\%PLYVER%\USER\Client\0\Controls\Mappings
-set STUSRDIR_D=%STUSRPATH%\StarCitizen\%PLYVER%\USER\Client\0\Profiles\default
-set RESDIR=dir /s /b ".\BackupData\%PLYVER%\*.xml"*
+for /f "tokens=*" %%i in ('findstr /v "{ ( ) js: Error libraryFolder ." %APPDATA%\rsilauncher\log.log ^| findstr "\\"') do SET LIBPATH=%%~i
+SET LIBPATH=%LIBPATH:\\=\%
+SET USRDIR_M=dir /s /b "%LIBPATH%\StarCitizen\%PLYVER%\USER\Client\0\Controls\Mappings\*.xml"*
+SET USRDIR_D=dir /s /b "%LIBPATH%\StarCitizen\%PLYVER%\USER\Client\0\Profiles\default\*.xml"*
+for %%i in ("%LIBPATH%") do SET STUSRPATH=%%~si
+SET STUSRDIR_M=%STUSRPATH%\StarCitizen\%PLYVER%\USER\Client\0\Controls\Mappings
+SET STUSRDIR_D=%STUSRPATH%\StarCitizen\%PLYVER%\USER\Client\0\Profiles\default
+SET RESDIR=dir /s /b ".\BackupData\%PLYVER%\*.xml"*
 
 echo.
 echo %MODE%対象は以下です
@@ -76,7 +78,7 @@ if %errorlevel% neq 0 (
 )
 echo.
 
-set /P CHK="%MODE%を実行してもよろしいですか？ (yes/no)"
+SET /P CHK="%MODE%を実行してもよろしいですか？ (yes/no)"
 
 if /i %CHK%==yes (goto CONTINUE)
 if /i %CHK%==y (goto CONTINUE)
@@ -89,19 +91,35 @@ pause
 exit
 
 :CONTINUE
+echo.
 
 if /i %MODE%==バックアップ (
   robocopy %STUSRDIR_M% .\BackupData\%PLYVER%\MappingProfile /r:1 /w:1 > nul
+  if !errorlevel! leq 7 (
+    echo 操作プロファイルを.\BackupData\%PLYVER%にバックアップしました
+  ) else (
+    echo 操作プロファイルのバックアップに失敗しました
+  )
   robocopy %STUSRDIR_D% .\BackupData\%PLYVER%\CurrentSettting /r:1 /w:1 > nul
-  echo.
-  echo 設定を.\BackupData\%PLYVER%にバックアップしました
-  echo.
+  if !errorlevel! leq 7 (
+    echo 設定を.\BackupData\%PLYVER%にバックアップしました
+  ) else (
+    echo 設定のバックアップに失敗しました
+  )
 ) else if /i %MODE%==復元 (
   robocopy .\BackupData\%PLYVER%\MappingProfile %STUSRDIR_M% /r:1 /w:1 > nul
+  if !errorlevel! leq 7 (
+    echo 操作プロファイルを復元しました
+  ) else (
+    echo 操作プロファイルの復元に失敗しました
+  )
   robocopy .\BackupData\%PLYVER%\CurrentSettting %STUSRDIR_D% /r:1 /w:1 > nul
-  echo.
-  echo 設定を復元しました
-  echo.
+  if !errorlevel! leq 7 (
+    echo 設定を復元しました
+  ) else (
+    echo 設定の復元に失敗しました
+  )
 )
 
+echo.
 pause
