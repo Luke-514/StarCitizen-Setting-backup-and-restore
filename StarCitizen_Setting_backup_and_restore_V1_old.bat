@@ -6,7 +6,7 @@ echo –{ƒoƒbƒ`ƒtƒ@ƒCƒ‹‚Ìg—p‚É‚æ‚Á‚Ä”­¶‚µ‚½A‚¢‚©‚È‚é‘¹ŠQ‚É‘Î‚µ‚Ä‚àìÒ‚ÍˆêØ‚Ì
 echo.
 
 echo ìÒ 
-echo Luke514 Twitter:@rx_luke
+echo Luke514 Twitter:@rx_luke Discord:Shadow514#0642
 echo --------------------------------------------------------------------------------------------------------------
 echo.
 
@@ -50,7 +50,7 @@ if /i %CHK%==live (
   EXIT
 )
 
-for /f "tokens=*" %%i in ('findstr /v "{ ( ) js: Error libraryFolder ." %APPDATA%\rsilauncher\logs\log.log ^| findstr "\\"') do SET LIBPATH=%%~i
+for /f "tokens=*" %%i in ('findstr /v "{ ( ) js: Error libraryFolder ." %APPDATA%\rsilauncher\log.log ^| findstr "\\"') do SET LIBPATH=%%~i
 SET LIBPATH=%LIBPATH:\\=\%
 SET USRDIR_M=dir /s /b "%LIBPATH%\StarCitizen\%PLYVER%\USER\Client\0\Controls\Mappings\*.xml"*
 SET USRDIR_D=dir /s /b "%LIBPATH%\StarCitizen\%PLYVER%\USER\Client\0\Profiles\default\*.xml"*
