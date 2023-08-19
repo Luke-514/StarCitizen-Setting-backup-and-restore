@@ -5,7 +5,7 @@ echo Disclaimer
 echo Use this batch file at your own risk.
 echo.
 
-echo çÏé“ 
+echo Creator
 echo Luke514 Twitter:@rx_luke
 echo --------------------------------------------------------------------------------------------------------------
 echo.
