@@ -84,6 +84,7 @@ if /i %CHK%==yes (goto CONTINUE)
 if /i %CHK%==y (goto CONTINUE)
 
 echo.
+echo An unexpected character was entered.
 echo Abort process.
 echo.
 pause

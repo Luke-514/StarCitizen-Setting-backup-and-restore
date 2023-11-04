@@ -84,6 +84,7 @@ if /i %CHK%==yes (goto CONTINUE)
 if /i %CHK%==y (goto CONTINUE)
 
 echo.
+echo —\Šú‚µ‚È‚¢•¶Žš‚ª“ü—Í‚³‚ê‚Ü‚µ‚½
 echo ˆ—‚ð’†Ž~‚µ‚Ü‚·
 echo.
 pause
