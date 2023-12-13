@@ -19,7 +19,6 @@ https://support.robertsspaceindustries.com/hc/en-us/articles/360000183328-Create
 # 使い方/How to use
 1.&nbsp;バッチファイルをダウンロードします  
 &emsp;(Engは英語バージョンで言語以外に違いはありません)  
-&emsp;(oldは以前のバージョンです　現行バージョンで問題が発生した際にご利用ください)  
 2.&nbsp;任意の場所で実行します  
 3.&nbsp;BackupかRestore、どちらか実施したいほうを入力します(b、rでも可)  
 4.&nbsp;LIVEかPTU、実施したいバージョンを入力します(l、pでも可)  
@@ -27,7 +26,6 @@ https://support.robertsspaceindustries.com/hc/en-us/articles/360000183328-Create
   
 1.&nbsp;Download the batch file.  
 &emsp;(the Eng version is no different from the Jpn version except for the language)  
-&emsp;(old is the previous version Please use it if you encounter problems with the current version)  
 2.&nbsp;Run the file at any location.  
 3.&nbsp;Enter either Backup or Restore, whichever you want to implement (can be b or r)  
 4.&nbsp;Live or PTU, enter the version you want to implement (can be l or p)  
