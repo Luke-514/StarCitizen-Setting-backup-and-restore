@@ -19,6 +19,7 @@ https://support.robertsspaceindustries.com/hc/en-us/articles/360000183328-Create
 # 使い方/How to use
 1.&nbsp;バッチファイルをダウンロードします  
 &emsp;(Engは英語バージョンで言語以外に違いはありません)  
+&emsp;(文字化けする方はUTF8をお使いください)  
 2.&nbsp;任意の場所で実行します  
 3.&nbsp;BackupかRestore、どちらか実施したいほうを入力します(b、rでも可)  
 4.&nbsp;LIVEかPTU、実施したいバージョンを入力します(l、pでも可)  
